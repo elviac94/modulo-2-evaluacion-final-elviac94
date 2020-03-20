@@ -5,27 +5,31 @@ const ulList = document.querySelector('.main__list');
 const favList = document.querySelector('.aside__list');
 const URL = 'http://api.tvmaze.com/search/shows?q=';
 const placeholderURL = 'https://via.placeholder.com/210x295/ffffff/666666/?';
-const favSeries =[];
+let seriesTV = null;
+let seriesFound = [];
+const favSeries = [];
 
 //función que hace la petición a la API//
 function getSerieName() {
     fetch(`http://api.tvmaze.com/search/shows?q=${inputName.value}`)
         .then(response => response.json())
         .then(data => {
-            const seriesTV = data
-            getSerieList(seriesTV)
-
+            seriesTV = data
+            for (let item of data) {
+                seriesFound.push(item)
+            }
+            showSerieList(seriesTV)
         })
 }
 
 //función que pinta las series//
-function getSerieList(seriesTV) {
+function showSerieList(seriesTV) {
     let list = ``;
     for (const serie of seriesTV) {
         if (serie.show.image !== null) {
             list += `<li id=${serie.show.id}><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
         } else {
-            list += `<li  id=${serie.show.id}><p>${serie.show.name}</p><img src=${placeholderURL}>`
+            list += `<li id=${serie.show.id}><p>${serie.show.name}</p><img src=${placeholderURL}>`
         }
     }
     ulList.innerHTML = list
@@ -36,17 +40,63 @@ function getSerieList(seriesTV) {
 function addSerieLiListener() {
     const serieLi = document.querySelectorAll('.main__list li')
     for (const li of serieLi) {
-        li.addEventListener('click',getFavSeries);
+        li.addEventListener('click', onclickLi);
     }
 }
 
-// función para añadir las series favoritas//
-function getFavSeries(event){
- const serieSelected= event.currentTarget.id
- console.log(serieSelected)
- favSeries.push(serieSelected)
- 
+// función que atiende a lo que pasa al clicar//
+
+function onclickLi(event) {
+    addFavSeries(event.currentTarget.id)
+    showFavSeries()
+
+
 }
-console.log(favSeries)
+
+// función para añadir las series favoritas al array favSeries//
+function addFavSeries(id) {
+    if(favSeries.indexOf(id)===-1){
+        favSeries.push(id)
+    }
+    
+    console.log(favSeries)
+}
+
+
+function getSerieObject(id) {
+    return seriesFound.find(serie => serie.show.id === parseInt(id))
+}
+
+function showFavSeries() {
+    //console.log(seriesTV)
+    favList.innerHTML='';
+    for (const favSerie of favSeries) {
+        const object = getSerieObject(favSerie)
+        //console.log(object)
+        //console.log(object.show.id)
+        if (favSerie == object.show.id) {
+            let favLi = document.createElement('li');
+            let textLi = document.createElement('p');
+            let imgLi = document.createElement('img');
+            if (object.show.image !== null) {
+                imgLi.setAttribute('src', `${object.show.image.medium}`);
+            } else {
+                imgLi.setAttribute('src', `${placeholderURL}`);
+            }
+            favLi.setAttribute('id', `${object.show.id}`);
+            textLi.innerText = `${object.show.name}`
+            favLi.appendChild(textLi);
+            favLi.appendChild(imgLi);
+            favList.appendChild(favLi);
+        }
+        //console.log(favSerie)
+
+    }
+
+}
+
 
 searchButton.addEventListener('click', getSerieName);
+
+
+
