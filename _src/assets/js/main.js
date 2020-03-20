@@ -3,7 +3,7 @@ const inputName = document.querySelector('#main__input');
 const searchButton = document.querySelector('#button-search');
 const ulList = document.querySelector('.main__list');
 const URL = 'http://api.tvmaze.com/search/shows?q='
-
+const placeholderURL='https://via.placeholder.com/210x295/ffffff/666666/?'
 function getSerieName(){
 
     console.log(inputName.value)
@@ -20,7 +20,12 @@ function getSerieName(){
 function getSerieList(seriesTV){
     let list= ``;
         for( const serie of seriesTV){
-            list +=`<li><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
+            if(serie.show.image !==null){
+                list +=`<li><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
+            }else{
+                list +=`<li><p>${serie.show.name}</p><img src=${placeholderURL}>`
+            }
+           
         }
         ulList.innerHTML=list
 }
