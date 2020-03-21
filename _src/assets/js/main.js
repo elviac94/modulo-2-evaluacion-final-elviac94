@@ -75,6 +75,7 @@ function showFavSeries() {
         //console.log(object.show.id)
         if (favSerie == object.show.id) {
             let favLi = document.createElement('li');
+            let buttonLi = document.createElement('button');
             let textLi = document.createElement('p');
             let imgLi = document.createElement('img');
             if (object.show.image !== null) {
@@ -84,12 +85,12 @@ function showFavSeries() {
             }
             favLi.setAttribute('id', `${object.show.id}`);
             textLi.innerText = `${object.show.name}`;
+            buttonLi.innerText=`X`;
+            favLi.appendChild(buttonLi)
             favLi.appendChild(textLi);
             favLi.appendChild(imgLi);
-
-
             favList.appendChild(favLi);
-            favLi.addEventListener('click', onClickFav)
+            buttonLi.addEventListener('click', onClickFav)
 
         }
     }
