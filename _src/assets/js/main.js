@@ -9,6 +9,7 @@ let seriesTV = null;
 let seriesFound = readFoundLocalStorage()//cargo series found de localStorage//
 const favSeries = readFavsLocalStorage()// cargo favseries del localstorage//
 
+
 //función que hace la petición a la API//
 function getSerieName() {
     fetch(`http://api.tvmaze.com/search/shows?q=${inputName.value}`)
@@ -51,11 +52,12 @@ function onclickLi(event) {
     addFavLocalStorage()
     addSeriesFoundLocalStorage()
     showFavSeries()
+    console.log(event)
 }
 
 // función para añadir las series favoritas al array favSeries//
 function addFavSeries(id) {
-    if(favSeries.indexOf(id)===-1){
+    if (favSeries.indexOf(id) === -1) {
         favSeries.push(id)
     }
 }
@@ -66,7 +68,7 @@ function getSerieObject(id) {
 
 function showFavSeries() {
     //console.log(seriesTV)
-    favList.innerHTML='';
+    favList.innerHTML = '';
     for (const favSerie of favSeries) {
         const object = getSerieObject(favSerie)
         //console.log(object)
@@ -84,42 +86,58 @@ function showFavSeries() {
             textLi.innerText = `${object.show.name}`;
             favLi.appendChild(textLi);
             favLi.appendChild(imgLi);
+
+
             favList.appendChild(favLi);
+            favLi.addEventListener('click', onClickFav)
+
         }
-        //console.log(favSerie)
-
     }
-
 }
 
 //función para guardar en el localstorage//
-function addFavLocalStorage(){
-    localStorage.setItem('favourites',JSON.stringify(favSeries))
+function addFavLocalStorage() {
+    localStorage.setItem('favourites', JSON.stringify(favSeries))
 
 }
-function addSeriesFoundLocalStorage(){
+function addSeriesFoundLocalStorage() {
     localStorage.setItem('seriesFound', JSON.stringify(seriesFound));
 }
 
 //función para leer el localsotrage//
-function readFavsLocalStorage(){
-    let localInfo =JSON.parse(localStorage.getItem('favourites'));
-    if(localInfo !==null){
+function readFavsLocalStorage() {
+    let localInfo = JSON.parse(localStorage.getItem('favourites'));
+    if (localInfo !== null) {
         return localInfo
-    } else{
-        return localInfo=[]
+    } else {
+        return localInfo = []
     }
- }
-function readFoundLocalStorage(){
+}
+function readFoundLocalStorage() {
     let localInfo = JSON.parse(localStorage.getItem('seriesFound'))
-    if(localInfo !==null){
+    if (localInfo !== null) {
         return localInfo
-    } else{
-        return localInfo =[]
+    } else {
+        return localInfo = []
     }
 }
 
+function onClickFav(event) {
+    const idSelected = event.currentTarget.id;
+    removeFavSeries(idSelected);
+    addFavLocalStorage()
+    showFavSeries()
+}
 
+function removeFavSeries(idSelected) {
+    const index = favSeries.indexOf(idSelected)
+    favSeries.splice(index, 1)
+}
+
+
+
+
+showFavSeries()
 searchButton.addEventListener('click', getSerieName);
 
 
