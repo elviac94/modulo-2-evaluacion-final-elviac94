@@ -1,0 +1,26 @@
+.page__aside{
+    
+    display: flex;
+    flex-direction: column;
+
+    & .aside__title{
+        margin-bottom: 15px;
+        margin-top: 15px;
+        font-family: 'Lucida Sans Unicode';
+        font-size: 15px;
+        color: aquamarine;
+    }
+
+    & .aside__list{
+        list-style: none;
+
+        & li{
+            font-size: 20px;
+            color: brown;
+
+            & img{
+                width: 60%;
+            }
+        }
+    }
+}

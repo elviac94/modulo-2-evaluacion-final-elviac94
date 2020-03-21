@@ -1,3 +1,31 @@
-main{
-  background-color: red;
+.page{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.page__main{
+  width: 70%;
+  
+  & .main__title{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-family: 'Lucida Sans Unicode';
+    font-size: 20px;
+    color: aquamarine;
+    text-transform: uppercase;
+  }
+
+  & .main__list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    & li{
+      margin-top: 15px;
+      margin-bottom: 15px;
+      color: crimson;
+      font-size: 15px;
+    }
+  }
+
 }

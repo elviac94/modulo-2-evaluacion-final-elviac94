@@ -60,8 +60,6 @@ function addFavSeries(id) {
     }
 }
 
-
-
 function getSerieObject(id) {
     return seriesFound.find(serie => serie.show.id === parseInt(id))
 }
