@@ -6,8 +6,8 @@ const favList = document.querySelector('.aside__list');
 const URL = 'http://api.tvmaze.com/search/shows?q=';
 const placeholderURL = 'https://via.placeholder.com/210x295/ffffff/666666/?';
 let seriesTV = null;
-let seriesFound = [];
-const favSeries = [];
+let seriesFound = readFoundLocalStorage()//cargo series found de localStorage//
+const favSeries = readFavsLocalStorage()// cargo favseries del localstorage//
 
 //función que hace la petición a la API//
 function getSerieName() {
@@ -44,13 +44,13 @@ function addSerieLiListener() {
     }
 }
 
-// función que atiende a lo que pasa al clicar//
+// función que atiende a lo que pasa al clicar en el botón search//
 
 function onclickLi(event) {
     addFavSeries(event.currentTarget.id)
+    addFavLocalStorage()
+    addSeriesFoundLocalStorage()
     showFavSeries()
-
-
 }
 
 // función para añadir las series favoritas al array favSeries//
@@ -58,9 +58,8 @@ function addFavSeries(id) {
     if(favSeries.indexOf(id)===-1){
         favSeries.push(id)
     }
-    
-    console.log(favSeries)
 }
+
 
 
 function getSerieObject(id) {
@@ -84,7 +83,7 @@ function showFavSeries() {
                 imgLi.setAttribute('src', `${placeholderURL}`);
             }
             favLi.setAttribute('id', `${object.show.id}`);
-            textLi.innerText = `${object.show.name}`
+            textLi.innerText = `${object.show.name}`;
             favLi.appendChild(textLi);
             favLi.appendChild(imgLi);
             favList.appendChild(favLi);
@@ -93,6 +92,33 @@ function showFavSeries() {
 
     }
 
+}
+
+//función para guardar en el localstorage//
+function addFavLocalStorage(){
+    localStorage.setItem('favourites',JSON.stringify(favSeries))
+
+}
+function addSeriesFoundLocalStorage(){
+    localStorage.setItem('seriesFound', JSON.stringify(seriesFound));
+}
+
+//función para leer el localsotrage//
+function readFavsLocalStorage(){
+    let localInfo =JSON.parse(localStorage.getItem('favourites'));
+    if(localInfo !==null){
+        return localInfo
+    } else{
+        return localInfo=[]
+    }
+ }
+function readFoundLocalStorage(){
+    let localInfo = JSON.parse(localStorage.getItem('seriesFound'))
+    if(localInfo !==null){
+        return localInfo
+    } else{
+        return localInfo =[]
+    }
 }
 
 
