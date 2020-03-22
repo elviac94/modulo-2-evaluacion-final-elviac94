@@ -5,7 +5,7 @@
 }
 .page__main{
   width: 70%;
-  background-color: rgb(232, 248, 245);
+  background-color: white;
   
   & .main__title{
     margin-top: 15px;
@@ -40,6 +40,11 @@
 
       & img{
         width: 70%;
+      }
+
+      &.fav{
+        color: rgb(171, 235, 198);
+        background-color: rgb(236, 64, 122);
       }
     }
   }

@@ -27,10 +27,16 @@ function getSerieName() {
 function showSerieList(seriesTV) {
     let list = ``;
     for (const serie of seriesTV) {
+        let favclass='';
+        if(favSeries.indexOf(serie.show.id.toString()) !== -1){
+            favclass='fav'
+        }
+        console.log(favclass)
+
         if (serie.show.image !== null) {
-            list += `<li id=${serie.show.id}><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
+            list += `<li class=${favclass} id=${serie.show.id}><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
         } else {
-            list += `<li id=${serie.show.id}><p>${serie.show.name}</p><img src=${placeholderURL}>`
+            list += `<li class=${favclass} id=${serie.show.id}><p>${serie.show.name}</p><img src=${placeholderURL}>`
         }
     }
     ulList.innerHTML = list
