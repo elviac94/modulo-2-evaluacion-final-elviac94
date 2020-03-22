@@ -46,13 +46,11 @@ function addSerieLiListener() {
 }
 
 // función que atiende a lo que pasa al clicar en el botón search//
-
 function onclickLi(event) {
     addFavSeries(event.currentTarget.id)
     addFavLocalStorage()
     addSeriesFoundLocalStorage()
     showFavSeries()
-    console.log(event)
 }
 
 // función para añadir las series favoritas al array favSeries//
@@ -67,12 +65,9 @@ function getSerieObject(id) {
 }
 
 function showFavSeries() {
-    //console.log(seriesTV)
     favList.innerHTML = '';
     for (const favSerie of favSeries) {
         const object = getSerieObject(favSerie)
-        //console.log(object)
-        //console.log(object.show.id)
         if (favSerie == object.show.id) {
             let favLi = document.createElement('li');
             let buttonLi = document.createElement('button');
@@ -85,15 +80,18 @@ function showFavSeries() {
             }
             favLi.setAttribute('id', `${object.show.id}`);
             textLi.innerText = `${object.show.name}`;
-            buttonLi.innerText=`X`;
+            buttonLi.innerText = `X`;
             favLi.appendChild(buttonLi)
             favLi.appendChild(textLi);
             favLi.appendChild(imgLi);
             favList.appendChild(favLi);
             buttonLi.addEventListener('click', onClickFav)
-
         }
     }
+    const deleteAll = document.createElement('button');
+    deleteAll.innerText = 'Borrar';
+    favList.appendChild(deleteAll);
+    deleteAll.addEventListener('click', removeAllFav);
 }
 
 //función para guardar en el localstorage//
@@ -123,6 +121,7 @@ function readFoundLocalStorage() {
     }
 }
 
+//función que atiende al click del butón de cada li//
 function onClickFav(event) {
     const idSelected = event.currentTarget.id;
     removeFavSeries(idSelected);
@@ -130,12 +129,18 @@ function onClickFav(event) {
     showFavSeries()
 }
 
+//función que borra el li //
 function removeFavSeries(idSelected) {
     const index = favSeries.indexOf(idSelected)
     favSeries.splice(index, 1)
 }
 
-
+//función que atiende al click del botón borrar y que borra todo el array//
+function removeAllFav() {
+    favSeries.splice(0, favSeries.length);
+    addFavLocalStorage()
+    showFavSeries()
+}
 
 
 showFavSeries()
