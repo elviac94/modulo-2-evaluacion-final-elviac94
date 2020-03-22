@@ -6,8 +6,8 @@ const favList = document.querySelector('.aside__list');
 const URL = 'http://api.tvmaze.com/search/shows?q=';
 const placeholderURL = 'https://via.placeholder.com/210x295/ffffff/666666/?';
 let seriesTV = null;
-let seriesFound = readFoundLocalStorage()//cargo series found de localStorage//
-const favSeries = readFavsLocalStorage()// cargo favseries del localstorage//
+let seriesFound = readFoundLocalStorage()
+const favSeries = readFavsLocalStorage()
 
 
 //función que hace la petición a la API//
@@ -31,12 +31,12 @@ function showSerieList(seriesTV) {
         if(favSeries.indexOf(serie.show.id.toString()) !== -1){
             favclass='fav'
         }
-        console.log(favclass)
+        //console.log(favclass)
 
         if (serie.show.image !== null) {
-            list += `<li class=${favclass} id=${serie.show.id}><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
+            list += `<li class="${favclass}" id="${serie.show.id}"><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
         } else {
-            list += `<li class=${favclass} id=${serie.show.id}><p>${serie.show.name}</p><img src=${placeholderURL}>`
+            list += `<li class="${favclass}" id="${serie.show.id}"><p>${serie.show.name}</p><img src=${placeholderURL}>`
         }
     }
     ulList.innerHTML = list
@@ -53,10 +53,14 @@ function addSerieLiListener() {
 
 // función que atiende a lo que pasa al clicar en el botón search//
 function onclickLi(event) {
-    addFavSeries(event.currentTarget.id)
-    addFavLocalStorage()
-    addSeriesFoundLocalStorage()
-    showFavSeries()
+    console.log('event');
+    console.log(event);
+    console.log('event.currentTarget.id');
+    console.log(event.currentTarget.id);
+    addFavSeries(event.currentTarget.id);
+    addFavLocalStorage();
+    addSeriesFoundLocalStorage();
+    showFavSeries();
 }
 
 // función para añadir las series favoritas al array favSeries//
@@ -72,8 +76,11 @@ function getSerieObject(id) {
 
 function showFavSeries() {
     favList.innerHTML = '';
+    console.log(favSeries)
     for (const favSerie of favSeries) {
         const object = getSerieObject(favSerie)
+        console.log(object)
+        console.log(favSerie)
         if (favSerie == object.show.id) {
             let favLi = document.createElement('li');
             let buttonLi = document.createElement('button');
@@ -129,7 +136,8 @@ function readFoundLocalStorage() {
 
 //función que atiende al click del butón de cada li//
 function onClickFav(event) {
-    const idSelected = event.currentTarget.id;
+    const idSelected = event.currentTarget.parentElement.id;
+    console.log(event.currentTarget)
     removeFavSeries(idSelected);
     addFavLocalStorage()
     showFavSeries()
@@ -138,6 +146,7 @@ function onClickFav(event) {
 //función que borra el li //
 function removeFavSeries(idSelected) {
     const index = favSeries.indexOf(idSelected)
+    console.log(index)
     favSeries.splice(index, 1)
 }
 
