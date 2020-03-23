@@ -129,7 +129,6 @@ function readFoundLocalStorage() {
 //función que atiende al click del butón de cada li//
 function onClickFav(event) {
     const idSelected = event.currentTarget.parentElement.id;
-    console.log(event.currentTarget)
     removeFavSeries(idSelected);
     addFavLocalStorage()
     showFavSeries()
@@ -138,7 +137,6 @@ function onClickFav(event) {
 //función que borra el li //
 function removeFavSeries(idSelected) {
     const index = favSeries.indexOf(idSelected)
-    console.log(index)
     favSeries.splice(index, 1)
 }
 
