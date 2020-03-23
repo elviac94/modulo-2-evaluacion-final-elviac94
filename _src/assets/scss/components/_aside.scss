@@ -1,13 +1,13 @@
 .page__aside{
-    
     display: flex;
     flex-direction: column;
+    align-items: center;
     
 
     & .aside__title{
         margin-bottom: 15px;
         margin-top: 15px;
-        font-family: $font-main;
+        font-family: "Helvetica";
         font-size: 20px;
         color: rgb(0, 137, 123);
         text-align: center;

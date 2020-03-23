@@ -1,6 +1,7 @@
 .page{
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-around;
   
 }
 .page__main{
@@ -10,10 +11,18 @@
   & .main__title{
     margin-top: 15px;
     margin-bottom: 10px;
-    font-family: $font-main;
+    font-family: "Helvetica";
     font-size: 20px;
     color: rgb(0, 137, 123);
     text-transform: uppercase;
+  }
+
+  & .button-search{
+    border-radius: 25%;
+    background-color: rgb(236, 64, 122);
+    color: white;
+    border: none;
+    padding: 6px;
   }
 
   & .main__list{
@@ -33,7 +42,7 @@
       margin-top: 15px;
       margin-bottom: 15px;
       color: rgb(236, 64, 122);
-      font-family: $font-main;
+      font-family: "Helvetica";
       font-size: 20px;
       background-color:rgb(171, 235, 198);
       text-transform: uppercase;

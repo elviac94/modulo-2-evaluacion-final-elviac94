@@ -27,12 +27,10 @@ function getSerieName() {
 function showSerieList(seriesTV) {
     let list = ``;
     for (const serie of seriesTV) {
-        let favclass='';
-        if(favSeries.indexOf(serie.show.id.toString()) !== -1){
-            favclass='fav'
+        let favclass = '';
+        if (favSeries.indexOf(serie.show.id.toString()) !== -1) {
+            favclass = 'fav'
         }
-        //console.log(favclass)
-
         if (serie.show.image !== null) {
             list += `<li class="${favclass}" id="${serie.show.id}"><p>${serie.show.name}</p><img src=${serie.show.image.medium}>`
         } else {
@@ -53,10 +51,6 @@ function addSerieLiListener() {
 
 // función que atiende a lo que pasa al clicar en el botón search//
 function onclickLi(event) {
-    console.log('event');
-    console.log(event);
-    console.log('event.currentTarget.id');
-    console.log(event.currentTarget.id);
     addFavSeries(event.currentTarget.id);
     addFavLocalStorage();
     addSeriesFoundLocalStorage();
@@ -74,13 +68,11 @@ function getSerieObject(id) {
     return seriesFound.find(serie => serie.show.id === parseInt(id))
 }
 
+//función que muestra la lista de favoritos//
 function showFavSeries() {
     favList.innerHTML = '';
-    console.log(favSeries)
     for (const favSerie of favSeries) {
         const object = getSerieObject(favSerie)
-        console.log(object)
-        console.log(favSerie)
         if (favSerie == object.show.id) {
             let favLi = document.createElement('li');
             let buttonLi = document.createElement('button');
