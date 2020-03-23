@@ -49,6 +49,9 @@
       font-size: 20px;
       background-color:rgb(171, 235, 198);
       text-transform: uppercase;
+      @media all and (max-width:768px){
+        font-size: 14px;
+      }
 
       & img{
         width: 70%;
