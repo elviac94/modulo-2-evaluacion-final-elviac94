@@ -9,7 +9,7 @@
         margin-top: 15px;
         font-family: "Helvetica";
         font-size: 20px;
-        color: rgb(0, 137, 123);
+        color: #4cd3c2;
         text-align: center;
         text-transform: uppercase;
     }
@@ -33,8 +33,8 @@
             & p{
                 width: 33%;
                 text-transform: uppercase;
-                font-size: 20px;
-                color: rgb(236, 64, 122);
+                font-size: 18px;
+                color: #f54291;
                 @media all and (max-width:768px){
                     font-size: 12px;
                 }
@@ -50,7 +50,7 @@
                 padding: 0;
                 height: 20px;
                 border-radius: 100%;
-                background-color: black;
+                background-color: #0a97b0;
                 color: white;
                 text-transform: lowercase;
                 border: none;
@@ -68,7 +68,7 @@
             border-radius: 25%;
             border: none;
             text-transform: uppercase;
-            background-color: black;
+            background-color: #0a97b0;
             color: white;
 
         }
