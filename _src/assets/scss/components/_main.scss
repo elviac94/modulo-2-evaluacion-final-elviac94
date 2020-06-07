@@ -1,48 +1,84 @@
-.page{
+.page {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;
-  background-color: #FAEEE7;
+  background-color: #faeee7;
   min-height: 100vh;
   width: 100%;
-  
+
 }
-.page__main{
+
+::-webkit-scrollbar{
+  width: 15px;
+  background-color: #faeee7;
+}
+
+::-webkit-scrollbar-track{
+  background-color: #faeee7;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #4cd3c2;
+  border-radius: 10px;
+  height: 5px;
+}
+
+.page__main {
   width: 70%;
-  background-color: #FAEEE7;
-  
-  & .main__title{
+  background-color: #faeee7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .main__title {
     margin-top: 15px;
     margin-bottom: 10px;
     font-family: "Helvetica";
     font-size: 20px;
     color: #4cd3c2;
     text-transform: uppercase;
+    @media all and (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 
-  & .button-search{
+  & .main__input {
+    color: #f54291;
+    border: 2px solid #0a97b0;
+    width: 200px;
+    background-color: #faeee7;
+
+    &::placeholder {
+      color: #0a97b0;
+    }
+
+    @media all and (max-width: 768px) {
+      width: 100px;
+    }
+  }
+
+  & .button-search {
     border-radius: 25%;
     background-color: #0a97b0;
     color: white;
     border: none;
     padding: 6px;
-    @media all and (max-width:768px){
+    @media all and (max-width: 768px) {
       margin-top: 10px;
     }
   }
 
-  & .main__list{
+  & .main__list {
     list-style: none;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    @media all and (max-width:500px){
+    @media all and (max-width: 500px) {
       display: flex;
       flex-direction: column;
-      
     }
 
-    & li{
+    & li {
       width: 25%;
       height: 35%;
       padding-top: 15px;
@@ -54,38 +90,40 @@
       margin-right: 15px;
       margin-top: 15px;
       margin-bottom: 15px;
-      color: #FAEEE7;
+      color: #faeee7;
       font-family: "Helvetica";
       font-size: 16px;
-      background-color:#f54291;
+      background-color: #f54291;
       text-transform: uppercase;
       border-radius: 7%;
-      box-shadow: 5px 5px 5px 5px #C9C9C9;
+      box-shadow: 5px 5px 5px 5px #c9c9c9;
 
-      @media all and (max-width:500px){
-        width: 60%;
+      @media all and (max-width: 500px) {
+        width: 70%;
+        height: 35%;
+        
       }
-      @media all and (max-width:768px){
+      @media all and (max-width: 768px) {
         font-size: 14px;
+        height: 25%;
       }
 
-      & img{
+      & img {
         width: 70%;
         border-radius: 7%;
       }
 
-      & p{
+      & p {
         margin-top: 15px;
         margin-bottom: 15px;
         margin-left: 5px;
         margin-right: 5px;
       }
 
-      &.fav{
-        color: #FAEEE7;
+      &.fav {
+        color: #faeee7;
         background-color: #0a97b0;
       }
     }
   }
-
 }
