@@ -3,7 +3,7 @@ const inputName = document.querySelector('#main__input');
 const searchButton = document.querySelector('#button-search');
 const ulList = document.querySelector('.main__list');
 const favList = document.querySelector('.aside__list');
-const URL = 'http://api.tvmaze.com/search/shows?q=';
+const URL = 'https://api.tvmaze.com/search/shows?q=';
 const placeholderURL = 'https://via.placeholder.com/210x295/ffffff/666666/?';
 let seriesTV = null;
 let seriesFound = readFoundLocalStorage()
@@ -12,7 +12,7 @@ const favSeries = readFavsLocalStorage()
 
 //función que hace la petición a la API//
 function getSerieName() {
-    fetch(`http://api.tvmaze.com/search/shows?q=${inputName.value}`)
+    fetch(`https://api.tvmaze.com/search/shows?q=${inputName.value}`)
         .then(response => response.json())
         .then(data => {
             seriesTV = data
